@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> to-do list.</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="app.js"></script>
+
+  <link rel="stylesheet" href="skeleton.css">
+  <link rel="stylesheet" href="normalize.css">
+</head>
+
+<body ng-app="todoApp" ng-controller="TodoCtrl as Ctrl">
+  
+  <div class="container">
+    <h1>to-do list.</h1>
+    A simple personal to-do list.
+    <ul>
+        <!--
+          Create a new todo using the text from the 
+          input whenever the add button is clicked/Enter is pressed.
+        -->
+        <form ng-submit="Ctrl.addToDo(todo)">
+          <div>
+            <span>
+              <button type="submit">Add</button>
+            </span>
+            <input placeholder="What do you need to do?" ng-model="todo">
+          </div>  
+        </form>
+    
+      <!--
+        Repeat this list element for each todo in the 
+        list of todos
+      -->
+      <li ng-repeat="todo in Ctrl.todos" ng-show="selected.showTodo(todo)">
+        <!--
+          Set the class of this label to "done" when the todo's
+          done property is true.
+        -->
+        <label ng-class="{'done' : todo.done}">
+          <!--
+            Link this checkbox to a todo's done property and show the text
+          -->
+          <input type="checkbox" ng-model="todo.done">
+          {{todo.text}}
+        </label>
+      </li>
+      
+    </ul>
+
+    <!-- 
+      Show the All, Active and Complete filters from the controller.
+    -->
+    <select ng-model="selected" ng-options="filter.label for filter in Ctrl.filters">
+    </select>
+    
+    <!--
+      When clicked, remove any todos form the list of 
+      todos where done is set to true.
+    -->
+    <button ng-click="Ctrl.clearComplete()">Clear Complete</button>
+
+  </div>
+
+</body>
+</html>
