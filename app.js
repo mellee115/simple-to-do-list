@@ -27,7 +27,6 @@ TodoCtrl.prototype.addToDo = function(todo){
 
 
 TodoCtrl.prototype.clearComplete = function(){
-
     for(let i = this.todos.length - 1;i >= 0;i--){
       if(this.todos[i].done){
         this.todos.splice(i,1);
